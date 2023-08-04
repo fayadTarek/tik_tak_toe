@@ -3,47 +3,53 @@
 using namespace std;
 enum joueur {X, O, vide};
 
-typedef array<array<joueur ,2>,2> tik;
+typedef array<array<joueur ,3>,3> tik;
 
 
-tik initialise ( tik ar){
-    for(auto ligne: ar){
-        for(auto colonne : ligne){
-            colonne = vide;
-        }
+tik initialise ( tik &ar){
+    for (size_t i = 0; i <= ar.size(); i++)
+    {
+        for (size_t t = 0; t <= ar[i].size(); t++)
+        {
+            ar[i][t] = vide;
+        }   
     }
     return ar;
 }
 
 void print(tik ar){
-    for (size_t i = 0; i <= ar.size(); i++)
+   
+  for(auto colonne :ar){
+    for (size_t i = 0; i < colonne.size(); i++)
     {
-        for (size_t t = 0; t <= ar[i].size(); t++)
-        {
-            switch (ar[i][t])
-            {
-            case X:
-                cout << "X";
-                break;
-            case O:
-                cout << "O";
-                break;
-            case vide:
-                cout <<" ";
-                break;
-            }
-            if(t < 2){
-                cout << " | ";
-            }
+         if(colonne[i] == vide){
+            cout << " ";
+        }else if(colonne[i] == X){
+            cout << "X";
+        }else if(colonne[i] == O){
+            cout << "O";
         }
-        cout << endl;
+        if(i < 2){
+            cout << " | ";
+        }
     }
+    
+    cout << endl;
+  }
+
+    for (size_t i = 1; i < 4; i++)
+    {
+        cout << i << "   ";
+    }
+    
     
 }
 
 int main (){
     tik grille;
     initialise(grille);
+     grille [1][0] = X;
+     grille [1][1] = X;
     print (grille);
 
     return 0;
