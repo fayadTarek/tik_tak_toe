@@ -7,6 +7,8 @@ typedef array<array<joueur ,3>,3> tik;
 tik initialise ( tik &ar);
 void print(tik ar);
 void joue(bool jouer , tik &ar);
+bool joueurInpute(size_t colonne , size_t ligne , tik ar);
+
 
 tik initialise ( tik &ar){
     for (size_t i = 0; i <= ar.size(); i++)
@@ -65,10 +67,24 @@ void joue(bool jouer , tik &ar){
         cin >> colonne;
         cout << ">entrez le ligne :";
         cin >> ligne;
-    } while (((colonne > ar.size()) || (ligne > ar[0].size())) || (ar[colonne-1][ligne-1] !=vide));
+    } while (not joueurInpute(colonne,ligne,ar));
     ar[ligne-1][colonne-1] = Joueur;
 }
 
+bool joueurInpute(size_t colonne , size_t ligne , tik ar){
+    
+    if(((colonne > ar.size()) || (ligne > ar[0].size()))){
+        cout << "le position est foux " << endl;
+        return false;
+    }else if((ar[colonne-1][ligne-1] !=vide)){
+        cout << "l'espace est plein " << endl;
+        return false;
+    }else{
+        return true;
+    }
+
+    
+}
 
 int main (){
     bool tour = true;
